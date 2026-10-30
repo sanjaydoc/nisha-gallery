@@ -100,6 +100,9 @@ a{color:inherit}
 @media(max-width:900px){.ng-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ng-det{grid-template-columns:minmax(0,1fr);gap:24px}}
 @media(max-width:520px){.ng-grid{grid-template-columns:minmax(0,1fr)}.ng-fl,.ng-crypto{grid-template-columns:minmax(0,1fr)}.ng-qr{grid-template-columns:minmax(0,1fr)}.ng-qr svg{margin:0 auto}}
 
+
+.ng-demo{background:#2a2016;color:#d8b26e;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px 16px}
+.ng-demo a{color:#f4efe6;margin-left:6px}
 /* ---------- admin (layout A, MedDroid admin look) ---------- */
 .ad{--bg:#fbfbfa;--sp:#fff;--shd:rgba(90,98,112,.18);--shl:#fff;--ink:#22304f;--mut:#6a7699;--line:#eef1f7;--blue:#2F6FE0;--green:#1f9d78;--amber:#c98a1e;--purple:#8a53d6;--red:#e04646;--grad:linear-gradient(135deg,#5a9bff,#2F6FE0);--disp:Poppins,Inter,system-ui,sans-serif;
   background:var(--bg);color:var(--ink);min-height:100vh;font-size:14px;color-scheme:light}

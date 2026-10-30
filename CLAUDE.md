@@ -23,6 +23,16 @@ crypto as second options: **Polygon (main), Ethereum, BNB Smart Chain, Bitcoin, 
   `gallery-originals` private → buyers get 7-day signed links).
 - Deploy: `npm run build` then commit `docs/` and push main.
 
+## Demo
+`VITE_DEMO=1 npx vite build --outDir <tmp>` → `src/demo.ts` fakes the API in the browser (6 sample works, simulated Razorpay and
+crypto, admin open without sign-in). Published as https://claude.ai/artifact/SphkBWyL1gvFLxxMf4RzCb (inlined single HTML).
+
+## Nisha's own Supabase (founder plan 2026-10-30)
+Nisha creates the Supabase project and runs medicalandroid `supabase/gallery.sql`. Then: her project URL + publishable key go into
+`src/api.ts` (createClient), URL into `GALLERY_SUPABASE_URL` in medicalandroid `chat-worker/wrangler.toml`, and her **service_role key**
+as Worker secret `GALLERY_SUPABASE_SERVICE_KEY` (Cloudflare dashboard; never in chat or git). Add the site URL to her Supabase Auth
+redirect URLs and enable Google sign-in there.
+
 ## Not done yet / honest notes
 - **On-chain minting is manual:** after an NFT sale the admin mints token #N to the buyer's wallet (needs an ERC-721 contract on Polygon,
   not deployed yet) and marks the order "NFT minted" with the tx. Next step: deploy the contract and automate minting.

@@ -1,7 +1,7 @@
 /* Admin (founder chose layout A, 2026-10-30): only the gallery admin (GALLERY_ADMINS on the Worker) can upload.
    Each upload makes a normal copy (print + download) and a 1-of-1 NFT copy with its own token number. */
 import { useEffect, useRef, useState } from 'react';
-import { adminArtworks, adminCreate, adminDelete, adminFulfil, adminMe, adminOrders, adminSaveSettings, adminSettings, adminUpdate, adminUpload, CHAINS, inr, supabase, type AdminOrder, type Artwork, type Settings } from './api';
+import { adminArtworks, adminCreate, adminDelete, adminFulfil, adminMe, adminOrders, adminSaveSettings, adminSettings, adminUpdate, adminUpload, CHAINS, auth, inr, type AdminOrder, type Artwork, type Settings } from './api';
 import { explorer } from './pay';
 
 type Tab = 'home' | 'works' | 'orders' | 'payouts';
@@ -35,20 +35,20 @@ export function Admin({ go }: { go: (h: string) => void }) {
 
   useEffect(() => {
     const check = async () => {
-      const s = (await supabase.auth.getSession()).data.session;
+      const s = (await auth.getSession()).data.session;
       if (!s) { setState('out'); return; }
       setEmail(s.user.email || '');
       try { await adminMe(); setState('in'); await load(); } catch { setState('denied'); }
     };
     check();
-    const { data } = supabase.auth.onAuthStateChange((e) => { if (e === 'SIGNED_IN' || e === 'SIGNED_OUT') check(); });
+    const { data } = auth.onAuthStateChange((e) => { if (e === 'SIGNED_IN' || e === 'SIGNED_OUT') check(); });
     return () => data.subscription.unsubscribe();
   }, []);
-  const signIn = () => supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname + '#/admin' } });
+  const signIn = () => auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname + '#/admin' } });
 
   if (state !== 'in') return <div className="ad"><div className="ad-gate neu">
     <h1>Gallery <span>admin</span></h1>
-    {state === 'loading' ? <p>Checking your sign-in…</p> : state === 'denied' ? <><p>{email} is not a gallery admin. Only the admin can upload artworks.</p><button className="btn g" onClick={() => supabase.auth.signOut()}>Sign out</button></> : <><p>Sign in with the gallery admin Google account to upload artworks and see orders.</p><button className="btn" onClick={signIn}>Sign in with Google</button></>}
+    {state === 'loading' ? <p>Checking your sign-in…</p> : state === 'denied' ? <><p>{email} is not a gallery admin. Only the admin can upload artworks.</p><button className="btn g" onClick={() => auth.signOut()}>Sign out</button></> : <><p>Sign in with the gallery admin Google account to upload artworks and see orders.</p><button className="btn" onClick={signIn}>Sign in with Google</button></>}
     <button className="lnk" onClick={() => go('#/')}>← Back to the gallery</button>
   </div></div>;
 
@@ -56,7 +56,7 @@ export function Admin({ go }: { go: (h: string) => void }) {
   const home = arts.filter((a) => a.on_home && a.published).sort((x, y) => x.home_order - y.home_order);
   const todo = paid.filter((o) => o.fulfil_status === 'todo').length;
   return <div className="ad">
-    <header className="ad-bar"><b className="ad-logo"><i>N</i>Nisha Gallery</b><span className="chip in c-green">🔒 Admin · {email}</span><span className="sp" /><button className="btn g sm" onClick={() => go('#/')}>View site</button><button className="btn g sm" onClick={() => supabase.auth.signOut()}>Sign out</button></header>
+    <header className="ad-bar"><b className="ad-logo"><i>N</i>Nisha Gallery</b><span className="chip in c-green">🔒 Admin · {email}</span><span className="sp" /><button className="btn g sm" onClick={() => go('#/')}>View site</button><button className="btn g sm" onClick={() => auth.signOut()}>Sign out</button></header>
     <div className="ad-app">
       <nav className="rail">{(Object.keys(LABEL) as Tab[]).map((t) => <button key={t} className={`rb${tab === t ? ' on' : ''}`} onClick={() => setTab(t)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: ICONS[t] }} />{LABEL[t]}{t === 'orders' && todo > 0 && <em>{todo}</em>}</button>)}</nav>
       <main className="ad-main">

@@ -2,6 +2,7 @@
    Crypto goes straight from the buyer's wallet to the gallery's wallet; the Worker checks it on-chain. */
 import qrcode from 'qrcode-generator';
 import type { Chain, Order } from './api';
+import { DEMO } from './demo';
 
 declare global { interface Window { Razorpay?: any; ethereum?: any } }
 
@@ -16,6 +17,7 @@ export function loadRazorpay(): Promise<void> {
 }
 /** Opens Razorpay Checkout; resolves with the signed payment details, rejects if the buyer closes it. */
 export async function payRazorpay(o: Order, buyer: { name: string; email: string; phone: string }): Promise<Record<string, string>> {
+  if (DEMO) { await new Promise((r) => setTimeout(r, 900)); return { razorpay_order_id: o.rzp_order_id!, razorpay_payment_id: 'pay_demo' + Date.now(), razorpay_signature: 'demo' }; }
   await loadRazorpay();
   return new Promise((ok, bad) => {
     const rz = new window.Razorpay({

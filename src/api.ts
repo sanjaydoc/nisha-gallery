@@ -1,10 +1,14 @@
 /* Talks to the /gallery/* routes on MedDroid's chat Worker (medicalandroid repo, chat-worker/worker.js).
    The Worker holds the Razorpay keys and the Supabase service key; this site holds nothing secret. */
 import { createClient } from '@supabase/supabase-js';
+import { DEMO, demoAuth, demoCall } from './demo';
 
 export const API = 'https://medicalandroid-chat.dr-sanjayanbu.workers.dev';
 // Public (publishable) Supabase key: used only for the admin's Google sign-in.
-export const supabase = createClient('https://jeusnqudtuajafpjodjg.supabase.co', 'sb_publishable_wA1RROIgG_VcqYaZMP5xtg_rPEiJjYh', { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
+export const supabase = DEMO ? (null as never) : createClient('https://jeusnqudtuajafpjodjg.supabase.co', 'sb_publishable_wA1RROIgG_VcqYaZMP5xtg_rPEiJjYh', { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
+
+/** Sign-in for the admin page (a stand-in in the demo build, which needs no accounts). */
+export const auth = DEMO ? demoAuth : supabase.auth;
 
 export type Artwork = {
   id: string; slug: string; title: string; artist: string; medium: string; about: string; image_url: string;
@@ -38,6 +42,7 @@ export const inr = (n: number) => '₹' + (n || 0).toLocaleString('en-IN');
 
 async function call<T>(path: string, init: RequestInit = {}, auth = false): Promise<{ status: number; data: T }> {
   const headers: Record<string, string> = { ...(init.body && typeof init.body === 'string' ? { 'Content-Type': 'application/json' } : {}), ...((init.headers as Record<string, string>) || {}) };
+  if (DEMO) return demoCall<T>(path, init);
   if (auth) { const t = (await supabase.auth.getSession()).data.session?.access_token; if (t) headers.Authorization = `Bearer ${t}`; }
   let r: Response;
   try { r = await fetch(API + path, { ...init, headers }); } catch { throw new Error('Could not reach the gallery server. Check your connection.'); }

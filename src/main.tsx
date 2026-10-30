@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { listArtworks, type Artwork, type PayInfo } from './api';
 import { ArtPage, Home, Nav } from './Site';
 import { Admin } from './Admin';
+import { DEMO } from './demo';
 import './styles.css';
 
 const route = () => location.hash.replace(/^#/, '') || '/';
@@ -15,10 +16,12 @@ function App() {
   useEffect(() => { if (!r.startsWith('/admin')) listArtworks().then(setData, (e) => setErr(e.message)); }, [r]);
   const go = (h: string) => { if (h.includes('#about')) { location.hash = '#/'; setTimeout(() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }), 50); return; } location.hash = h; };
 
-  if (r.startsWith('/admin')) return <Admin go={go} />;
+  const demo = DEMO && <div className="ng-demo">Demo · sample artworks · payments are simulated · {r.startsWith('/admin') ? <a href="#/">Open the gallery</a> : <a href="#/admin">Open the admin</a>}</div>;
+  if (r.startsWith('/admin')) return <>{demo}<Admin go={go} /></>;
   const slug = /^\/art\/([^/?]+)/.exec(r)?.[1];
   const art = slug && data ? data.artworks.find((a) => a.slug === slug) : null;
   return <div className="ng">
+    {demo}
     <Nav go={go} />
     {err ? <div className="ng-wrap ng-empty">{err}</div> : !data ? <div className="ng-wrap ng-empty">Loading…</div>
       : slug ? (art ? <ArtPage a={art} pay={data.pay} go={go} /> : <div className="ng-wrap ng-empty">This artwork is not here any more. <a href="#/">See all works</a></div>)
