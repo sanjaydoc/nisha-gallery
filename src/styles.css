@@ -1,23 +1,23 @@
 /* ---------- visitor site: dark gallery ---------- */
-:root{--bg:#141210;--bg2:#1d1a17;--ink:#f4efe6;--mut:#a89f92;--line:#2d2925;--gold:#d8b26e;--purple:#a77bf3;--serif:Fraunces,Georgia,serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+:root{--bg:#faf8f4;--bg2:#ffffff;--ink:#1d1a17;--mut:#6f675c;--line:#e7e1d6;--gold:#a8782e;--purple:#7c4ddb;--serif:Fraunces,Georgia,serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
 *{box-sizing:border-box}
-body{margin:0;font:15px/1.6 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+body{margin:0;font:15px/1.6 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);color-scheme:light}
 button,input,select,textarea{font:inherit;color:inherit}
 a{color:inherit}
 .ng{min-height:100vh;display:flex;flex-direction:column}
 .ng-wrap{max-width:1180px;margin:0 auto;width:100%;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.ng-nav{position:sticky;top:0;z-index:10;background:rgba(20,18,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.ng-nav{position:sticky;top:0;z-index:10;background:rgba(250,248,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .ng-nav .ng-wrap{display:flex;align-items:center;gap:22px;padding-block:16px;flex-wrap:wrap}
 .ng-nav b{font:700 22px var(--serif);margin-right:auto;cursor:pointer}
 .ng-nav a{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;cursor:pointer}
 .ng-nav a.on,.ng-nav a:hover{color:var(--ink)}
 .ng-hero{position:relative;min-height:min(78vh,720px);background-size:cover;background-position:center;display:flex;align-items:flex-end}
 .ng-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.75))}
-.ng-cap{position:relative;padding-block:48px}
-.ng-kick{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.ng-cap{position:relative;padding-block:48px;color:#fff}
+.ng-kick{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#f2d29a}
 .ng-cap h1{font:600 clamp(36px,6vw,74px)/1.02 var(--serif);margin:6px 0 4px;text-wrap:balance}
 .ng-cap p{margin:0;color:#e5ddd0}
-.ng-cta{margin-top:18px;border:0;border-radius:999px;padding:12px 22px;background:var(--ink);color:var(--bg);font-weight:600;cursor:pointer}
+.ng-cta{margin-top:18px;border:0;border-radius:999px;padding:12px 22px;background:#fff;color:#1d1a17;font-weight:600;cursor:pointer}
 .ng-dots{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:24px;display:flex;gap:8px}
 .ng-dots button{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.35);cursor:pointer;padding:0}
 .ng-dots button.on{background:#fff}
@@ -30,23 +30,23 @@ a{color:inherit}
 .ng-filters button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .ng-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 22px;padding-bottom:70px}
 .ng-w{cursor:pointer;border:0;background:none;text-align:left;padding:0;color:inherit}
-.ng-im{aspect-ratio:4/5;background-size:cover;background-position:center;border-radius:4px;background-color:var(--bg2);transition:transform .3s}
+.ng-im{aspect-ratio:4/5;background-size:cover;background-position:center;border-radius:4px;background-color:#ece6dc;box-shadow:0 8px 26px rgba(60,45,25,.10);transition:transform .3s}
 .ng-w:hover .ng-im{transform:scale(1.015)}
 .ng-w h3{font:600 19px var(--serif);margin:12px 0 2px}
 .ng-meta{font-size:13px;color:var(--mut)}
 .ng-ed{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .ng-tag{font:600 10.5px var(--mono);padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);white-space:nowrap}
-.ng-tag.n{color:var(--purple);border-color:rgba(167,123,243,.4)}.ng-tag.sold{color:#e07a6a;border-color:rgba(224,122,106,.4)}
+.ng-tag.n{color:var(--purple);border-color:rgba(124,77,219,.35)}.ng-tag.sold{color:#b5452f;border-color:rgba(181,69,47,.35)}
 .ng-empty{padding-block:80px;color:var(--mut);text-align:center}
 .ng-back{border:0;background:none;color:var(--mut);cursor:pointer;padding:24px 0 10px;font-size:13px}
 .ng-det{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:44px;padding-bottom:70px;align-items:start}
 .ng-big{aspect-ratio:4/5;background-size:contain;background-repeat:no-repeat;background-position:center top;border-radius:4px}
 .ng-det h1{font:600 clamp(30px,4vw,46px)/1.05 var(--serif);margin:0;text-wrap:balance}
 .ng-by{color:var(--mut);margin:6px 0 18px}
-.ng-about{color:#d8d0c3;font-size:14.5px;white-space:pre-wrap}
+.ng-about{color:#3d3730;font-size:14.5px;white-space:pre-wrap}
 .ng-eds{display:grid;gap:14px;margin-top:22px}
-.ng-edc{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--bg2)}
-.ng-edc.nft{border-color:rgba(167,123,243,.45);background:linear-gradient(160deg,rgba(167,123,243,.09),transparent 60%),var(--bg2)}
+.ng-edc{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--bg2);box-shadow:0 6px 24px rgba(60,45,25,.06)}
+.ng-edc.nft{border-color:rgba(124,77,219,.35);background:linear-gradient(160deg,rgba(124,77,219,.07),transparent 60%),var(--bg2)}
 .ng-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .ng-top h4{font:600 18px var(--serif);margin:0}
 .ng-pr{margin-left:auto;font:600 20px var(--serif)}
@@ -101,8 +101,8 @@ a{color:inherit}
 @media(max-width:520px){.ng-grid{grid-template-columns:minmax(0,1fr)}.ng-fl,.ng-crypto{grid-template-columns:minmax(0,1fr)}.ng-qr{grid-template-columns:minmax(0,1fr)}.ng-qr svg{margin:0 auto}}
 
 
-.ng-demo{background:#2a2016;color:#d8b26e;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px 16px}
-.ng-demo a{color:#f4efe6;margin-left:6px}
+.ng-demo{background:#f1e6d2;color:#7a5520;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px 16px}
+.ng-demo a{color:#1d1a17;margin-left:6px}
 /* ---------- admin (layout A, MedDroid admin look) ---------- */
 .ad{--bg:#fbfbfa;--sp:#fff;--shd:rgba(90,98,112,.18);--shl:#fff;--ink:#22304f;--mut:#6a7699;--line:#eef1f7;--blue:#2F6FE0;--green:#1f9d78;--amber:#c98a1e;--purple:#8a53d6;--red:#e04646;--grad:linear-gradient(135deg,#5a9bff,#2F6FE0);--disp:Poppins,Inter,system-ui,sans-serif;
   background:var(--bg);color:var(--ink);min-height:100vh;font-size:14px;color-scheme:light}

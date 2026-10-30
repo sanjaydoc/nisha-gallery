@@ -21,7 +21,9 @@ crypto as second options: **Polygon (main), Ethereum, BNB Smart Chain, Bitcoin, 
 - **Backend:** medicalandroid repo → `chat-worker/worker.js` section "Nisha Gallery (/gallery/*)" (auto-deploys via Workers Builds).
   Tables/buckets: medicalandroid `supabase/gallery.sql` (gallery_artworks, gallery_orders, gallery_settings; buckets `gallery` public,
   `gallery-originals` private → buyers get 7-day signed links).
-- Deploy: `npm run build` then commit `docs/` and push main.
+- Deploy: **right now GitHub Pages serves the preview build** (`npm run build:preview` = demo data, simulated payments; founder
+  2026-10-30: "light theme + live on GitHub Pages"). Once Nisha's Supabase is connected: `npm run build` (live), commit `docs/`, push main.
+- Theme: visitor site is LIGHT (warm paper #faf8f4, founder 2026-10-30); admin keeps the MedDroid admin look.
 
 ## Demo
 `VITE_DEMO=1 npx vite build --outDir <tmp>` → `src/demo.ts` fakes the API in the browser (6 sample works, simulated Razorpay and
