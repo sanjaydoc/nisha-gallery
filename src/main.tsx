@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { listArtworks, type Artwork, type PayInfo } from './api';
 import { ArtPage, Home, Nav } from './Site';
 import { Admin } from './Admin';
+import { WallPage } from './Wall';
 import { DEMO } from './demo';
 import './styles.css';
 
@@ -24,6 +25,7 @@ function App() {
     {demo}
     <Nav go={go} />
     {err ? <div className="ng-wrap ng-empty">{err}</div> : !data ? <div className="ng-wrap ng-empty">Loading…</div>
+      : r.startsWith('/wall') ? <WallPage arts={data.artworks} go={go} />
       : slug ? (art ? <ArtPage a={art} pay={data.pay} go={go} /> : <div className="ng-wrap ng-empty">This artwork is not here any more. <a href="#/">See all works</a></div>)
       : <Home arts={data.artworks} go={go} />}
     <footer className="ng-foot"><div className="ng-wrap">Nisha Gallery · Chennai · Pay by UPI, card or netbanking (Razorpay), or with Polygon, Ethereum, BNB, Bitcoin or Solana · <a href="#/admin">Admin</a></div></footer>

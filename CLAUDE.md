@@ -35,6 +35,15 @@ Nisha creates the Supabase project and runs medicalandroid `supabase/gallery.sql
 as Worker secret `GALLERY_SUPABASE_SERVICE_KEY` (Cloudflare dashboard; never in chat or git). Add the site URL to her Supabase Auth
 redirect URLs and enable Google sign-in there.
 
+## See it on your wall (founder-approved mock https://claude.ai/artifact/HUo2YJDoXAj5ZbS2FT6DmJ, built 2026-10-31)
+- `src/Wall.tsx`: `WallCard` on the home page (title exactly "Upload or Take pic of your home to see matching paintings in gallery";
+  Take a photo = `<input capture="environment">`, Upload from gallery) and `WallPage` at `#/wall`: 1 photo (sample room until the
+  user adds one) → 2 pick 3 works (min(3, works)) → 3 each placed on the plainest wall area (`findWall`: lowest brightness variance
+  in the upper 72%, favouring the middle) at an estimated real size (cm parsed from `medium` "W × H cm"; door ≈ 2.1 m ≈ 62% of photo
+  height), above furniture; drag to move, Smaller/Real/Larger, No frame/Black/Wood (preview only), Buy → `#/art/<slug>`.
+  Browser-only: the photo never leaves the device. No perspective warp yet (straight-on photos work best). Styles `.rv-*` in styles.css
+  (Model Studio look). Tests: scratchpad `gallery-room/e2e.mjs` 22/22 (desktop + 390px) + `galw/e2e.mjs` 21/21 unchanged.
+
 ## Not done yet / honest notes
 - **On-chain minting is manual:** after an NFT sale the admin mints token #N to the buyer's wallet (needs an ERC-721 contract on Polygon,
   not deployed yet) and marks the order "NFT minted" with the tx. Next step: deploy the contract and automate minting.

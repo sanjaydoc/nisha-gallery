@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CHAINS, createOrder, inr, verifyOrder, type Artwork, type Chain, type Method, type Order, type Paid, type PayInfo } from './api';
+import { WallCard } from './Wall';
 import { evmAccount, explorer, hasEvmWallet, payEvm, payRazorpay, payUri, qrSvg } from './pay';
 
 export function Nav({ go }: { go: (h: string) => void }) {
@@ -22,6 +23,7 @@ export function Home({ arts, go }: { arts: Artwork[]; go: (h: string) => void })
     </section> : <section className="ng-wrap ng-intro"><h1>Original works, in <em>two editions</em></h1></section>}
     <div className="ng-wrap">
       <div className="ng-lead" id="about"><h2>Every work, two ways to own it</h2><p>A <b>normal copy</b>: an archival print, signed, delivered to your door. Or the <b>NFT copy</b>: one of one, owned on-chain, with the full-resolution original file. Pay by UPI or card, or with crypto.</p></div>
+      <WallCard arts={arts} go={go} />
       <div className="ng-filters">{([['all', 'All works'], ['nft', 'NFT available'], ['new', 'New']] as const).map(([k, l]) => <button key={k} className={f === k ? 'on' : ''} onClick={() => setF(k)}>{l}</button>)}</div>
       <div className="ng-grid">{list.map((a) => <button key={a.id} className="ng-w" onClick={() => go(`#/art/${a.slug}`)}>
         <div className="ng-im" style={{ backgroundImage: `url("${a.image_url}")` }} />
