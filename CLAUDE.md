@@ -66,4 +66,7 @@ LIVE on https://sanjaydoc.github.io/nisha-gallery/
 - Razorpay: the gallery uses Nisha's own account only (Worker secrets GALLERY_RAZORPAY_KEY_ID / _KEY_SECRET / _WEBHOOK_SECRET, webhook
   `<worker>/gallery/razorpay-webhook`). Razorpay restricts crypto/NFT-related payments: Nisha should tell Razorpay she sells art prints
   and check before taking NFT payments through it (prints are lower risk).
+- Webhook URL: https://medicalandroid-chat.dr-sanjayanbu.workers.dev/gallery/razorpay-webhook (events payment.captured + order.paid).
+  Pinned "Nisha Gallery Launch" artifact https://claude.ai/artifact/53RNKHn6gayFq6Ukz6eBtm updated to v2 (2026-10-31): Razorpay row = Nisha's own
+  account, new step 5 (open her Razorpay + 3 Worker secrets + webhook), warning card rewritten. Status: waiting for Nisha's Razorpay account.
 - Tests: worker 45/45 (scratchpad `galw/test.mjs`), browser e2e 21/21 (`galw/e2e.mjs`: real worker code + fake Supabase/Razorpay/chains).
