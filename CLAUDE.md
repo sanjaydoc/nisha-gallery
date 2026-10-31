@@ -44,6 +44,22 @@ redirect URLs and enable Google sign-in there.
   Browser-only: the photo never leaves the device. No perspective warp yet (straight-on photos work best). Styles `.rv-*` in styles.css
   (Model Studio look). Tests: scratchpad `gallery-room/e2e.mjs` 22/22 (desktop + 390px) + `galw/e2e.mjs` 21/21 unchanged.
 
+### Founder summary (as reported 2026-10-31)
+LIVE on https://sanjaydoc.github.io/nisha-gallery/
+| Part | What it does |
+|---|---|
+| Home page card | "Upload or Take pic of your home to see matching paintings in gallery", with Take a photo (opens the phone camera) and Upload from gallery |
+| Step 1 · Your wall | Shows your photo, with a sample room until you add one |
+| Step 2 · Pick 3 paintings | Tap 3 favourites (1-2-3 badges); the next step unlocks at 3 |
+| Step 3 · See them on your wall | Each painting sits on the clearest part of your wall, above the furniture, at about its real size. Switch between the 3, drag to move, choose size and frame, then Buy this painting opens its page |
+- Tests: 22/22 for the new feature (desktop + phone); the gallery's existing 21 checks still pass.
+- Photo stays private: never leaves the phone, nothing uploaded.
+- Sizes are estimates from the size in the painting's description (e.g. "90 × 120 cm"); no size listed → typical size, and the page says so.
+- Angled photos: no perspective bending yet, so straight-on photos look best.
+- Frames are a preview only; the gallery doesn't sell frames.
+- Sample artworks until Nisha's database is connected.
+- Next: founder tries it on the phone and says what to adjust.
+
 ## Not done yet / honest notes
 - **On-chain minting is manual:** after an NFT sale the admin mints token #N to the buyer's wallet (needs an ERC-721 contract on Polygon,
   not deployed yet) and marks the order "NFT minted" with the tx. Next step: deploy the contract and automate minting.
