@@ -1,7 +1,7 @@
 # CLAUDE.md — Nisha Gallery (project memory)
 
 Art gallery site for the founder (Dr. Sanjay Anbu). Approved 2026-10-30: admin layout **A** (mock https://claude.ai/artifact/GvecRrqdNL6PNRkEij3V9k),
-visitor site (mock https://claude.ai/artifact/KKxkhSFt7UVDQ7oZUo9NXx), NFT network **Polygon**, payments through the **same Razorpay as MedDroid**,
+visitor site (mock https://claude.ai/artifact/KKxkhSFt7UVDQ7oZUo9NXx), NFT network **Polygon**, payments through **Nisha's own Razorpay account** (same pipeline as MedDroid, NOT MedDroid's account or keys; founder 2026-10-31),
 crypto as second options: **Polygon (main), Ethereum, BNB Smart Chain, Bitcoin, Solana**.
 
 ## What it does
@@ -63,6 +63,7 @@ LIVE on https://sanjaydoc.github.io/nisha-gallery/
 ## Not done yet / honest notes
 - **On-chain minting is manual:** after an NFT sale the admin mints token #N to the buyer's wallet (needs an ERC-721 contract on Polygon,
   not deployed yet) and marks the order "NFT minted" with the tx. Next step: deploy the contract and automate minting.
-- Razorpay: MedDroid's merchant account is for health software. Razorpay restricts crypto/NFT-related payments; check with Razorpay
-  before taking NFT payments through it (normal copies are lower risk). A separate gallery account may be needed.
+- Razorpay: the gallery uses Nisha's own account only (Worker secrets GALLERY_RAZORPAY_KEY_ID / _KEY_SECRET / _WEBHOOK_SECRET, webhook
+  `<worker>/gallery/razorpay-webhook`). Razorpay restricts crypto/NFT-related payments: Nisha should tell Razorpay she sells art prints
+  and check before taking NFT payments through it (prints are lower risk).
 - Tests: worker 45/45 (scratchpad `galw/test.mjs`), browser e2e 21/21 (`galw/e2e.mjs`: real worker code + fake Supabase/Razorpay/chains).
